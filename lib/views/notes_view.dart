@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:notes_app/enums/menu_action.dart';
+import 'package:notes_app/views/create_update_note_view.dart';
+import 'package:notes_app/views/login_view.dart';
+
+class NotesView extends StatefulWidget {
+  const NotesView({super.key});
+
+  @override
+  State<NotesView> createState() => _NotesViewState();
+}
+
+class _NotesViewState extends State<NotesView> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Your Notes'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CreateUpdateNoteView(),)
+              );
+            }, 
+            icon: const Icon(Icons.add),
+          ),
+          PopupMenuButton<MenuAction>(
+            onSelected: (value) {
+              switch(value) {
+                case MenuAction.logout:
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginView(),
+                  ),
+                  (route) => false,
+                );
+              }
+            },
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text('Logout'),
+                ),
+              ];
+            },
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+        
+        ),
+      ),
+    );
+  }
+}

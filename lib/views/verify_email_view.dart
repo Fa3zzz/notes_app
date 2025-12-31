@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:notes_app/views/register_view.dart';
+
+class VerifyEmailView extends StatelessWidget {
+  const VerifyEmailView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Verify Email'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Text("We've sent you an email verification, please check your mail, under spam or junk as well please."),
+            SizedBox(height: 16),
+            const Text("If you've not received your email, please check if you have provided the correct mail or we can:"),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                print('Verification email requested');
+              }, 
+              child: const Text('Resend email verification'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Colors.white,
+              ),
+            ),
+            SizedBox(height: 16),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const RegisterView(),
+                  ), 
+                  (route) => false,
+                );
+              }, 
+              child: const Text('Restart'),
+              style: TextButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.primary,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
