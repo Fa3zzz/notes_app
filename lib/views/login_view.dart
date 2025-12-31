@@ -59,6 +59,9 @@ class _LoginViewState extends State<LoginView> {
               ),
               child: const Text("Login"),
             ),
+            const SizedBox(
+              height: 5,
+            ),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.primary,
@@ -73,6 +76,13 @@ class _LoginViewState extends State<LoginView> {
                 );
               }, 
               child: const Text('Not registered? Register now!'),
+            ),
+            const SizedBox(height: 5),
+            TextButton(
+              onPressed: () {
+                print('Forgot password screen is yet to be incorporated');
+              }, 
+              child: const Text('Forgot password?'),
             )
           ],
         ),

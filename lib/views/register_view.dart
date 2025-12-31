@@ -55,7 +55,7 @@ class _RegisterViewState extends State<RegisterView> {
                 hintText: 'Re-enter password',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             ElevatedButton(
@@ -73,6 +73,7 @@ class _RegisterViewState extends State<RegisterView> {
               }, 
               child: const Text('Register'),
             ),
+            const SizedBox(height: 5,),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.primary,
