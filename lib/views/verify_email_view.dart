@@ -23,11 +23,11 @@ class VerifyEmailView extends StatelessWidget {
               onPressed: () {
                 print('Verification email requested');
               }, 
-              child: const Text('Resend email verification'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
               ),
+              child: const Text('Resend email verification'),
             ),
             SizedBox(height: 16),
             TextButton(
@@ -38,10 +38,10 @@ class VerifyEmailView extends StatelessWidget {
                   (route) => false,
                 );
               }, 
-              child: const Text('Restart'),
               style: TextButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.primary,
               ),
+              child: const Text('Restart'),
             )
           ],
         ),
