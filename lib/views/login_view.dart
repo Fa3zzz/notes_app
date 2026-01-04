@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:notes_app/views/forgot_password_view.dart';
 import 'package:notes_app/views/notes_view.dart';
 import 'package:notes_app/views/register_view.dart';
 
@@ -99,7 +100,11 @@ class _LoginViewState extends State<LoginView> {
             const SizedBox(height: 5),
             TextButton(
               onPressed: () {
-                print('Forgot password screen is yet to be incorporated');
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const ForgotPasswordView(),
+                  ),
+                  (route) => false,
+                );
               }, 
               child: const Text('Forgot password?'),
             )
