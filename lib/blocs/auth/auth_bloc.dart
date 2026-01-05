@@ -2,6 +2,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/blocs/auth/auth_event.dart';
 import 'package:notes_app/blocs/auth/auth_state.dart';
+import 'package:notes_app/services/auth/auth_exceptions.dart';
 import 'package:notes_app/services/auth/auth_provider.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -64,11 +65,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final email = event.email;
         final password = event.password;
-        await provider.createUser(
-          email: email, 
-          password: password,
-        );
-        emit(const AuthStateNeedsVerification(isLoading: false));
+        final confirmPassword = event.confirmPassword;
+        if (password != confirmPassword) {
+          throw PasswordDoNotMatchExceptions();
+        } else {
+          await provider.createUser(
+            email: email, 
+            password: password,
+          );
+          emit(const AuthStateNeedsVerification(isLoading: false));
+        }
       } on Exception catch(e) {
         emit(AuthStateRegistering(
           exception: e, 

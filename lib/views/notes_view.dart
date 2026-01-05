@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/blocs/auth/auth_bloc.dart';
+import 'package:notes_app/blocs/auth/auth_event.dart';
 import 'package:notes_app/enums/menu_action.dart';
+import 'package:notes_app/utilities/logout_dialog.dart';
 import 'package:notes_app/views/create_update_note_view.dart';
-import 'package:notes_app/views/login_view.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -26,15 +29,15 @@ class _NotesViewState extends State<NotesView> {
             icon: const Icon(Icons.add),
           ),
           PopupMenuButton<MenuAction>(
-            onSelected: (value) {
+            onSelected: (value) async {
               switch(value) {
                 case MenuAction.logout:
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginView(),
-                  ),
-                  (route) => false,
-                );
+                final shouldLogout = await showLogoutDialog(context);
+                if (shouldLogout) {
+                  context.read<AuthBloc>().add(const AuthEventLogout());
+                } else {
+                  return;
+                }
               }
             },
             itemBuilder: (context) {

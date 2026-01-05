@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/views/register_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/blocs/auth/auth_bloc.dart';
+import 'package:notes_app/blocs/auth/auth_event.dart';
 
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({super.key});
@@ -21,7 +23,7 @@ class VerifyEmailView extends StatelessWidget {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                print('Verification email requested');
+                context.read<AuthBloc>().add(const AuthEventSendEmailVerification());
               }, 
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
@@ -32,11 +34,7 @@ class VerifyEmailView extends StatelessWidget {
             SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const RegisterView(),
-                  ), 
-                  (route) => false,
-                );
+                context.read<AuthBloc>().add(const AuthEventLogout());
               }, 
               style: TextButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.primary,
